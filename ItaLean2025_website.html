@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ItaLean 2025</title>
+
+    <!-- Bootstrap CSS (CDN) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            /* TODO: change the photo if needed. */
+            background-image: url(images/background.png);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-section {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(5px);
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+        }
+
+        .section-title {
+            color: #bb2e29;
+            border-bottom: 2px solid #bb2e29;
+            padding-bottom: 0.5rem;
+        }
+
+        .toggle-section {
+            cursor: pointer;
+            color: #005566;
+            font-weight: bold;
+        }
+
+        .toggle-section:hover {
+            text-decoration: underline;
+        }
+
+        .btn-custom {
+            background-color: #bb2e29;
+            border-color: #bb2e29;
+        }
+
+        .btn-custom:hover {
+            background-color: #005566;
+            border-color: #005566;
+        }
+
+        .table-custom th {
+            background-color: #f8f9fa;
+            color: #bb2e29;
+            border-color: #dee2e6;
+        }
+
+        .alert-custom {
+            background-color: rgba(187, 46, 41, 0.1);
+            border-color: rgba(187, 46, 41, 0.2);
+            color: #bb2e29;
+        }
+
+        .acknowledgement-banner {
+            background-color: rgba(187, 46, 41, 0.08);
+            border-left: 6px solid #bb2e29;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.08);
+        }
+
+        .acknowledgement-banner p:last-child {
+            margin-bottom: 0;
+        }
+
+        .acknowledgement-banner em {
+            color: #bb2e29;
+            font-size: 1.05rem;
+        }
+
+        .speaker-card,
+        .organizer-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            transition: transform 0.12s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .speaker-card:hover,
+        .organizer-card:hover,
+        .speaker-card:focus-visible,
+        .organizer-card:focus-visible {
+            transform: translateY(-2px);
+            background-color: rgba(187, 46, 41, 0.08);
+            box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12);
+            border-color: rgba(187, 46, 41, 0.35);
+        }
+
+        .speaker-card:focus-visible,
+        .organizer-card:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 0.25rem rgba(187, 46, 41, 0.25);
+        }
+
+        .speaker-card:active,
+        .organizer-card:active {
+            transform: translateY(0);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.14);
+            background-color: rgba(187, 46, 41, 0.12);
+        }
+
+        .sponsor-card {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            padding: 2rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.95);
+            transition: transform 0.12s ease, box-shadow 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        .sponsor-card:hover,
+        .sponsor-card:focus-visible {
+            transform: translateY(-2px);
+            background-color: rgba(187, 46, 41, 0.08);
+            box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.12);
+            border-color: rgba(187, 46, 41, 0.35);
+        }
+
+        .sponsor-card:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 0.25rem rgba(187, 46, 41, 0.25);
+        }
+
+        .sponsor-card:active {
+            transform: translateY(0);
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.14);
+            background-color: rgba(187, 46, 41, 0.12);
+        }
+
+        .sponsor-card.platinum {
+            border-color: rgba(180, 180, 180, 0.7);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(235, 239, 245, 0.95));
+        }
+
+        .sponsor-card.gold {
+            border-color: rgba(212, 175, 55, 0.6);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 243, 205, 0.95));
+        }
+
+        .sponsor-badge {
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+
+        .sponsor-badge-platinum {
+            color: #495057;
+            background-color: rgba(180, 180, 180, 0.25);
+        }
+
+        .sponsor-badge-gold {
+            color: #6c4a00;
+            background-color: rgba(212, 175, 55, 0.2);
+        }
+
+        .sponsor-logo {
+            display: block;
+            margin: 1.25rem auto 1rem;
+            max-width: 70%;
+            max-height: 90px;
+            object-fit: contain;
+            filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.1));
+        }
+
+        @media (max-width: 575.98px) {
+            .sponsor-logo {
+                max-width: 80%;
+                max-height: 72px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .speaker-card,
+            .organizer-card {
+                transition: none;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .navbar {
+                position: sticky;
+                top: 0;
+                z-index: 1020;
+            }
+
+            .hero-section {
+                padding-top: 6rem;
+            }
+        }
+
+
+        section[id],
+        h2[id] {
+            scroll-margin-top: 6.5rem;
+        }
+
+    </style>
+</head>
+
+<body>
+    <!-- BOOTSTRAP NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">ItaLean 2025</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="#top">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#applications">Participate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#organizers">Organizers</a></li>
+<!--                    <li class="nav-item"><a class="nav-link" href="#fees">Fees</a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="#accommodation">Accommodation</a></li>-->
+                    <li class="nav-item"><a class="nav-link" href="#speakers">Speakers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sponsors">Sponsors</a></li>
+<!--                    <li class="nav-item"><a class="nav-link" href="#timetable">Timetable</a></li>-->
+<!--                    <li class="nav-item"><a class="nav-link" href="#location">Location</a></li>-->
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="top" class="hero-section py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h1 class="display-4 fw-bold mb-3">ItaLean 2025</h1>
+                    <h2 class="fw-bold mb-3 fs-2">Bridging Formal Mathematics and AI</h2>
+                    <p class="lead">
+                        <span>Bologna, Italy</span>
+                        <span class="visually-hidden"> – </span>
+                        <span class="mx-2" aria-hidden="true">|</span>
+                        <span>December 9-12, 2025</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container my-5">
+        <div class="content-section p-4 rounded shadow">
+            <!-- Conference Theme Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+<!--                    <h2 id="theme" class="section-title mb-4">Conference Theme</h2>-->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <p class="card-text"><strong>ItaLean 2025</strong> brings together researchers and practitioners advancing the formalization of mathematics in Lean and exploring the interplay between machine learning and formal methods. The program includes invited lectures, hands-on tutorials, research talks from academia and industry, product demos, and a closing panel discussion.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Applications Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 id="applications" class="section-title mb-4">Participate</h2>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <p class="card-text">Applications to participate in ItaLean 2025 are now open. Priority will be given to applications submitted by <strong>October 31</strong>.</p>
+                            <p><strong>Participation is free of charge</strong> and includes access to all conference sessions, lunches, and coffee breaks. A limited amount of financial support for travel and accommodation may be available. Applicants may indicate their need for support in the application form.</p>
+                            <p>Applicants are encouraged to include a CV with their submission.</p>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8g1hqrrNa4YH6H0-nk2l1g32EBePtuqB3GnnFieWukuW2pA/viewform?usp=header"
+                                class="btn btn-custom text-white" target="_blank">Apply now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Organizers Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 id="organizers" class="section-title mb-4">Organizers</h2>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <a href="https://www.linkedin.com/in/eugenio-cainelli" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Eugenio Cainelli</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://www.unibo.it/sitoweb/marco.lenci" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Marco Lenci</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://github.com/LorenzoLuccioli" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Lorenzo Luccioli</h6>
+                                    <p class="card-text text-muted">University of Bologna, Harmonic</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://github.com/pitmonticone" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Pietro Monticone</h6>
+                                    <p class="card-text text-muted">University of Trento, Harmonic</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://giovannipaolini.org" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Giovanni Paolini</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://www.unibo.it/sitoweb/claudio.sacerdoticoen" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Claudio Sacerdoti Coen</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Speakers Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 id="speakers" class="section-title mb-4">Confirmed speakers</h2>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <a href="https://webusers.imj-prg.fr/~riccardo.brasca/" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Riccardo Brasca</h6>
+                                    <p class="card-text text-muted">Université Paris Cité</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://remydegenne.github.io" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Rémy Degenne</h6>
+                                    <p class="card-text text-muted">Inria</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://sites.math.rutgers.edu/~alexk/" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Alex Kontorovich</h6>
+                                    <p class="card-text text-muted">Rutgers University</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://mathematics.stanford.edu/people/jared-duker-lichtman" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Jared Duker Lichtman</h6>
+                                    <p class="card-text text-muted">Math Inc. / Morph Labs</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://uk.linkedin.com/in/bhavik-mehta-a60369148" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Bhavik Mehta</h6>
+                                    <p class="card-text text-muted">Imperial College London</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://leodemoura.github.io" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Leonardo de Moura</h6>
+                                    <p class="card-text text-muted">Amazon Web Services, Lean FRO</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://perso.univ-st-etienne.fr/nf51454h/" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Filippo Nuccio</h6>
+                                    <p class="card-text text-muted">Université Jean Monnet</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://github.com/habemus-papadum" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Nehal Patel</h6>
+                                    <p class="card-text text-muted">G-Research</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://people.epfl.ch/auguste.poiroux/?lang=en" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Auguste Poiroux</h6>
+                                    <p class="card-text text-muted">Math Inc. / Morph Labs</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://emilyriehl.github.io" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Emily Riehl</h6>
+                                    <p class="card-text text-muted">Johns Hopkins University</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://www.math.uni-bonn.de/people/rothgang/" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Michael Rothgang</h6>
+                                    <p class="card-text text-muted">University of Bonn</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://www.linkedin.com/in/simoneseverini" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Simone Severini</h6>
+                                    <p class="card-text text-muted">Google, Lean FRO</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://warwick.ac.uk/fac/sci/maths/people/staff/damiano_testa/" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Damiano Testa</h6>
+                                    <p class="card-text text-muted">University of Warwick</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://deepmind.google" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">TBA</h6>
+                                    <p class="card-text text-muted">Google DeepMind</p>
+                                </div>
+                            </a>
+                        </div>
+                                    <div class="col-md-4">
+                                        <a href="https://harmonic.fun" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                            <div class="card-body text-center">
+                                                <h6 class="card-title mb-2">TBA</h6>
+                                                <p class="card-text text-muted">Harmonic</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://projectnumina.ai" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">TBA</h6>
+                                    <p class="card-text text-muted">Numina</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acknowledgement Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 id="acknowledgement" class="section-title mb-4">Acknowledgement</h2>
+                    <div class="acknowledgement-banner">
+                        <p class="mb-3">The organizers kindly request that any papers or outputs developed during ItaLean 2025 acknowledge the conference using the statement below.</p>
+                        <p class="mb-0"><em>The author(s) would like to thank the University of Bologna for support and hospitality during the programme <strong>ItaLean 2025: Bridging Formal Mathematics and AI</strong>, where work on this paper was undertaken.</em></p>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Sponsors Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 id="sponsors" class="section-title mb-4">Sponsors</h2>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <p class="mb-4 text-center">We gratefully acknowledge the generous support of our sponsors.</p>
+                            <div class="row g-4 justify-content-center">
+                                <div class="col-md-4 col-sm-6">
+                                    <a href="https://harmonic.fun" class="sponsor-card platinum text-center text-reset" target="_blank" rel="noopener noreferrer">
+                                        <span class="badge rounded-pill sponsor-badge sponsor-badge-platinum">Platinum Sponsor</span>
+                                        <img src="images/Harmonic_logo_small.png" class="sponsor-logo img-fluid" alt="Harmonic logo">
+                                        <h5 class="mt-3 mb-1">Harmonic</h5>
+                                        <p class="text-muted small mb-0">Accelerating formal mathematics through human-centered AI tooling.</p>
+                                    </a>
+                                </div>
+                                <div class="col-md-4 col-sm-6">
+                                    <a href="https://www.gresearch.com" class="sponsor-card gold text-center text-reset" target="_blank" rel="noopener noreferrer">
+                                        <span class="badge rounded-pill sponsor-badge sponsor-badge-gold">Gold Sponsor</span>
+                                        <img src="images/GResearch_logo_small.png" class="sponsor-logo img-fluid" alt="G-Research logo">
+                                        <h5 class="mt-3 mb-1">G-Research</h5>
+                                        <p class="text-muted small mb-0">Advancing machine learning and quantitative research for the global community.</p>
+                                    </a>
+                                </div>
+                            </div>
+                            <p class="mb-0 text-center mt-4">Interested organizations can contact us at <a href="mailto:italean2025@gmail.com">italean2025@gmail.com</a>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>ItaLean 2025</h6>
+                    <p class="small mb-0">
+                        <span>Bologna, Italy</span>
+                        <span class="visually-hidden"> – </span>
+                        <span class="mx-2" aria-hidden="true">|</span>
+                        <span>December 9-12, 2025</span>
+                    </p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <p class="small mb-0">© ItaLean 2025 Conference. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
