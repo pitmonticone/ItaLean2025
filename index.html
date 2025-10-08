@@ -241,7 +241,6 @@
 
         .presenter-inline-text {
             font-size: 1.3rem;
-            /* tightened letter spacing for the 'Supported by' badge */
             letter-spacing: 0.02em;
             font-weight: 400;
             color: #000000;
@@ -280,14 +279,23 @@
             }
 
             .presenter-inline {
-                flex-direction: column;
+                flex-direction: row;
+                flex-wrap: nowrap;
                 gap: 0.4rem;
-                padding: 0.6rem 0.9rem;
+                padding: 0.65rem 1.05rem;
+                border-radius: 999px;
+            }
+
+            .presenter-inline-text {
+                font-size: 1.08rem;
+                letter-spacing: 0.01em;
+                text-align: center;
+                white-space: nowrap;
             }
 
             .presenter-inline-logo {
-                height: 50px;
-                max-width: 210px;
+                height: 48px;
+                max-width: 160px;
             }
         }
 
