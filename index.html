@@ -323,6 +323,164 @@
             max-width: 220px;
         }
 
+        .schedule-wrapper {
+            --slot-height: 24px;
+            overflow-x: auto;
+        }
+
+        .schedule-grid {
+            position: relative;
+            display: grid;
+            grid-auto-rows: auto;
+            min-width: calc(80px + 4 * 220px);
+            color: #0d1f2d;
+            --schedule-body-height: 0px;
+        }
+
+        .schedule-time-column {
+            position: relative;
+            border-right: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .schedule-time-header {
+            min-height: 3.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 0 0.75rem 0 0;
+        }
+
+        .schedule-time-body {
+            position: relative;
+            height: var(--schedule-body-height);
+        }
+
+        .schedule-time-label {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            font-size: 0.8rem;
+            color: #6c757d;
+            transform: translateY(-50%);
+            padding-right: 0.5rem;
+            text-align: right;
+        }
+
+        .schedule-day-column {
+            position: relative;
+            border-left: 1px solid rgba(0, 0, 0, 0.08);
+            background-color: rgba(255, 255, 255, 0.88);
+        }
+
+        .schedule-day-header {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+            background: rgba(255, 255, 255, 0.96);
+            min-height: 3.25rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .schedule-day-label {
+            display: block;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .schedule-day-date {
+            display: block;
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+
+        .schedule-day-body {
+            position: relative;
+            height: var(--schedule-body-height);
+            background-image: repeating-linear-gradient(to bottom, rgba(13, 31, 45, 0.06) 0, rgba(13, 31, 45, 0.06) 1px, transparent 1px, transparent calc(var(--slot-height) * 2));
+        }
+
+        .schedule-event {
+            position: absolute;
+            inset-inline-start: 0;
+            display: block;
+            border-radius: 0.75rem;
+            padding: 0.6rem 0.75rem;
+            border: 1px solid transparent;
+            background: rgba(108, 117, 125, 0.12);
+            color: inherit;
+            box-shadow: 0 0.35rem 1rem rgba(13, 31, 45, 0.12);
+            overflow: hidden;
+            font-size: 0.9rem;
+            line-height: 1.3;
+        }
+
+        .schedule-event--compact {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.2rem 0.6rem;
+            text-align: center;
+        }
+
+        .schedule-event-label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.92rem;
+            word-break: break-word;
+        }
+
+        .schedule-event--interactive {
+            cursor: pointer;
+            transition: transform 0.12s ease, box-shadow 0.2s ease;
+        }
+
+        .schedule-event--interactive:hover,
+        .schedule-event--interactive:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 0.6rem 1.5rem rgba(13, 31, 45, 0.2);
+        }
+
+        .schedule-event--interactive:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 0.25rem rgba(187, 46, 41, 0.3);
+        }
+
+        .schedule-event--static {
+            cursor: default;
+            box-shadow: 0 0.25rem 0.8rem rgba(13, 31, 45, 0.1);
+        }
+
+        .schedule-event--talk,
+        .schedule-event--workshop,
+        .schedule-event--panel {
+            background: rgba(187, 46, 41, 0.18);
+            border-color: rgba(187, 46, 41, 0.35);
+        }
+
+        .schedule-event--break,
+        .schedule-event--meal {
+            background: rgba(0, 85, 102, 0.12);
+            border-color: rgba(0, 85, 102, 0.25);
+        }
+
+        .schedule-event--session,
+        .schedule-event--project {
+            background: rgba(33, 37, 41, 0.12);
+            border-color: rgba(33, 37, 41, 0.2);
+        }
+
+        .schedule-legend {
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+
+        @media (max-width: 991.98px) {
+            .schedule-grid {
+                min-width: calc(80px + 4 * 180px);
+            }
+        }
+
         @media (max-width: 575.98px) {
             .sponsor-stack {
                 gap: 1.25rem;
@@ -367,6 +525,10 @@
             .presenter-inline-logo {
                 height: 48px;
                 max-width: 160px;
+            }
+
+            .schedule-grid {
+                min-width: calc(80px + 4 * 160px);
             }
         }
 
@@ -707,7 +869,12 @@
                         <h2 id="schedule" class="section-title mb-4">Schedule</h2>
                         <div class="card border-0 shadow-sm">
                             <div class="card-body">
-                                <p class="mb-0 text-muted">The detailed program is coming soon. Please check back for updates.</p>
+                                <p class="text-muted small mb-3">Click a talk to read the title and abstract. Times shown below are in Central European Time.</p>
+                                <div class="schedule-wrapper">
+                                    <div id="scheduleGrid" class="schedule-grid">
+                                        <div class="text-center py-4 text-muted" id="scheduleFallback">Loading schedule...</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -795,8 +962,250 @@
         </div>
     </footer>
 
+    <div class="modal fade" id="scheduleEventModal" tabindex="-1" aria-labelledby="scheduleEventModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="scheduleEventModalLabel">Talk details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-1 text-muted" id="scheduleEventTime"></p>
+                    <p class="fw-semibold mb-3" id="scheduleEventSpeakers"></p>
+                    <p class="mb-0" id="scheduleEventAbstract"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap JS bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/schedule-data.js"></script>
+    <script>
+        (function () {
+            const defaultConfig = { startTime: '08:00', endTime: '19:00', slotMinutes: 15, slotHeight: 24 };
+            const scheduleData = window.ItaleanSchedule || {};
+            const scheduleDays = Array.isArray(scheduleData.days) ? scheduleData.days : [];
+            const rawEvents = Array.isArray(scheduleData.events) ? scheduleData.events : [];
+            const config = Object.assign({}, defaultConfig, scheduleData.config || {});
+
+            const scheduleGrid = document.getElementById('scheduleGrid');
+            if (!scheduleGrid) {
+                return;
+            }
+
+            const fallback = document.getElementById('scheduleFallback');
+            if (!scheduleDays.length || !rawEvents.length) {
+                if (fallback) {
+                    fallback.textContent = 'Detailed program will be posted soon.';
+                } else {
+                    scheduleGrid.innerHTML = '<div class="text-center py-4 text-muted">Detailed program will be posted soon.</div>';
+                }
+                return;
+            }
+
+            if (fallback) {
+                fallback.remove();
+            }
+
+            const slotMinutes = Number(config.slotMinutes) || defaultConfig.slotMinutes;
+            const slotHeight = Number(config.slotHeight) || defaultConfig.slotHeight;
+            const scheduleStart = timeToMinutes(config.startTime || defaultConfig.startTime);
+            const scheduleEnd = timeToMinutes(config.endTime || defaultConfig.endTime);
+            const totalScheduleMinutes = scheduleEnd - scheduleStart;
+
+            scheduleGrid.style.gridTemplateColumns = `80px repeat(${scheduleDays.length}, minmax(220px, 1fr))`;
+            scheduleGrid.style.setProperty('--schedule-body-height', `${(totalScheduleMinutes / slotMinutes) * slotHeight}px`);
+            scheduleGrid.style.setProperty('--slot-height', `${slotHeight}px`);
+
+            const preparedEvents = rawEvents.map(event => ({
+                ...event,
+                startMinutes: timeToMinutes(event.start),
+                endMinutes: timeToMinutes(event.end)
+            }));
+
+            const eventLookup = new Map(preparedEvents.map(event => [event.id, event]));
+
+            const timeColumn = document.createElement('div');
+            timeColumn.className = 'schedule-time-column';
+
+            const timeHeader = document.createElement('div');
+            timeHeader.className = 'schedule-day-header schedule-time-header';
+            timeHeader.innerHTML = '<span class="visually-hidden">Times</span>';
+            timeColumn.appendChild(timeHeader);
+
+            const timeBody = document.createElement('div');
+            timeBody.className = 'schedule-time-body';
+            timeBody.setAttribute('aria-hidden', 'true');
+
+            const startMinutes = scheduleStart;
+            const endMinutes = scheduleEnd;
+            const totalMinutes = endMinutes - startMinutes;
+
+            for (let minute = startMinutes; minute < endMinutes; minute += 60) {
+                const label = document.createElement('div');
+                label.className = 'schedule-time-label';
+                label.style.top = `${((minute - startMinutes) / totalMinutes) * 100}%`;
+                label.textContent = formatTime(minute);
+                timeBody.appendChild(label);
+            }
+
+            timeColumn.appendChild(timeBody);
+            scheduleGrid.appendChild(timeColumn);
+
+            scheduleDays.forEach(day => {
+                const dayColumn = document.createElement('div');
+                dayColumn.className = 'schedule-day-column';
+
+                const header = document.createElement('div');
+                header.className = 'schedule-day-header';
+                header.innerHTML = `<span class="schedule-day-label">${day.label}</span><span class="schedule-day-date">${day.date}</span>`;
+                dayColumn.appendChild(header);
+
+                const body = document.createElement('div');
+                body.className = 'schedule-day-body';
+                dayColumn.appendChild(body);
+
+                const dayEvents = preparedEvents
+                    .filter(event => event.day === day.key)
+                    .sort((a, b) => (a.startMinutes - b.startMinutes) || (a.endMinutes - b.endMinutes));
+
+                layoutDay(dayEvents);
+
+                dayEvents.forEach(event => {
+                    const element = document.createElement('button');
+                    element.type = 'button';
+                    element.classList.add('schedule-event', 'schedule-event--interactive');
+                    if (event.type) {
+                        element.classList.add(`schedule-event--${event.type}`);
+                    }
+
+                    const offsetTop = ((event.startMinutes - startMinutes) / slotMinutes) * slotHeight;
+                    const height = ((event.endMinutes - event.startMinutes) / slotMinutes) * slotHeight;
+                    const totalColumns = event.totalColumns || 1;
+                    const columnWidth = 100 / totalColumns;
+                    const leftPercent = columnWidth * (event.column || 0);
+
+                    element.style.top = `${offsetTop}px`;
+                    element.style.height = `${height}px`;
+                    element.style.left = `${leftPercent}%`;
+                    element.style.width = `${columnWidth}%`;
+
+                    const visibleLabel = event.label || ((event.speakers && event.speakers.length) ? event.speakers.join(' & ') : event.title);
+                    const labelSpan = document.createElement('span');
+                    labelSpan.className = 'schedule-event-label';
+                    labelSpan.textContent = visibleLabel;
+                    element.appendChild(labelSpan);
+
+                    if (height <= slotHeight * 1.25) {
+                        element.classList.add('schedule-event--compact');
+                    }
+
+                    element.dataset.eventId = event.id;
+                    element.setAttribute('aria-label', `${event.title || visibleLabel} (${formatTimeRange(event, day)})`);
+
+                    body.appendChild(element);
+                });
+
+                scheduleGrid.appendChild(dayColumn);
+            });
+
+            const modalElement = document.getElementById('scheduleEventModal');
+            const modalTitle = document.getElementById('scheduleEventModalLabel');
+            const modalSpeakers = document.getElementById('scheduleEventSpeakers');
+            const modalTime = document.getElementById('scheduleEventTime');
+            const modalAbstract = document.getElementById('scheduleEventAbstract');
+            const scheduleModal = modalElement && window.bootstrap ? bootstrap.Modal.getOrCreateInstance(modalElement) : null;
+
+            scheduleGrid.addEventListener('click', event => {
+                const trigger = event.target.closest('.schedule-event--interactive');
+                if (!trigger || !scheduleModal) {
+                    return;
+                }
+
+                const eventId = trigger.dataset.eventId;
+                const scheduleEvent = eventLookup.get(eventId);
+                if (!scheduleEvent) {
+                    return;
+                }
+
+                modalTitle.textContent = scheduleEvent.title || 'Event details';
+
+                const speakers = Array.isArray(scheduleEvent.speakers) ? scheduleEvent.speakers.filter(Boolean) : [];
+                modalSpeakers.textContent = speakers.join(', ');
+                modalSpeakers.classList.toggle('d-none', speakers.length === 0);
+
+                const dayInfo = scheduleDays.find(day => day.key === scheduleEvent.day);
+                modalTime.textContent = formatTimeRange(scheduleEvent, dayInfo);
+
+                const abstractText = scheduleEvent.abstract && scheduleEvent.abstract.trim() ? scheduleEvent.abstract : 'Details coming soon.';
+                modalAbstract.textContent = abstractText;
+                scheduleModal.show();
+            });
+
+            function layoutDay(events) {
+                if (!events.length) {
+                    return;
+                }
+
+                let group = null;
+
+                events.forEach(event => {
+                    if (!group || event.startMinutes >= group.maxEnd) {
+                        finalizeGroup(group);
+                        group = {
+                            events: [],
+                            active: [],
+                            maxEnd: event.endMinutes,
+                            maxColumn: -1
+                        };
+                    } else {
+                        group.maxEnd = Math.max(group.maxEnd, event.endMinutes);
+                    }
+
+                    group.active = group.active.filter(activeEvent => activeEvent.endMinutes > event.startMinutes);
+                    const usedColumns = new Set(group.active.map(activeEvent => activeEvent.column));
+                    let column = 0;
+                    while (usedColumns.has(column)) {
+                        column += 1;
+                    }
+                    event.column = column;
+                    group.maxColumn = Math.max(group.maxColumn, column);
+                    group.events.push(event);
+                    group.active.push(event);
+                });
+
+                finalizeGroup(group);
+            }
+
+            function finalizeGroup(group) {
+                if (!group) {
+                    return;
+                }
+                const totalColumns = group.maxColumn + 1;
+                group.events.forEach(event => {
+                    event.totalColumns = totalColumns;
+                });
+            }
+
+            function timeToMinutes(time) {
+                const [hours, minutes] = time.split(':').map(Number);
+                return hours * 60 + minutes;
+            }
+
+            function formatTime(totalMinutes) {
+                const hours = Math.floor(totalMinutes / 60);
+                const minutes = totalMinutes % 60;
+                return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+            }
+
+            function formatTimeRange(event, dayInfo) {
+                const day = dayInfo || scheduleDays.find(item => item.key === event.day);
+                const dayLabel = day ? `${day.label}, ${day.date}` : '';
+                return `${dayLabel}${dayLabel ? ' - ' : ''}${event.start} to ${event.end}`;
+            }
+        })();
+    </script>
 </body>
 
 </html>
