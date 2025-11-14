@@ -586,6 +586,19 @@
         }
 
     </style>
+
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+            }
+        };
+    </script>
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 
 <body>
@@ -1173,8 +1186,26 @@
 
                 const abstractText = scheduleEvent.abstract && scheduleEvent.abstract.trim() ? scheduleEvent.abstract : 'Details coming soon.';
                 modalAbstract.textContent = abstractText;
+                queueMathTypeset(modalAbstract);
                 scheduleModal.show();
             });
+
+            function queueMathTypeset(element, attempt = 0) {
+                if (!element) {
+                    return;
+                }
+                const mathJax = window.MathJax;
+                if (mathJax && typeof mathJax.typesetPromise === 'function') {
+                    mathJax.typesetPromise([element]).catch(error => {
+                        console.error('MathJax typesetting failed:', error);
+                    });
+                    return;
+                }
+                if (attempt >= 10) {
+                    return;
+                }
+                setTimeout(() => queueMathTypeset(element, attempt + 1), 200);
+            }
 
             function layoutDay(events) {
                 if (!events.length) {
