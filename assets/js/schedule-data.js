@@ -50,7 +50,7 @@ window.ItaleanSchedule = {
         { id: "fri-1200-brownian", day: "2025-12-12", start: "12:00", end: "12:45", title: "The Brownian Motion Project", speakers: ["Rémy Degenne"], type: "lecture", abstract: "Abstract coming soon." },
         { id: "fri-1245-lunch", day: "2025-12-12", start: "12:45", end: "14:00", title: "Lunch", speakers: [], type: "meal", abstract: "Buffet lunch featuring local Emilia-Romagna flavours." },
         { id: "fri-1400-habemus", day: "2025-12-12", start: "14:00", end: "14:30", title: "Talk (title TBA)", speakers: ["Nehal Patel"], type: "lecture", abstract: "Detailed abstract will be posted soon." },
-        { id: "fri-1430-eric", day: "2025-12-12", start: "14:30", end: "15:15", title: "Lecture (title TBA)", speakers: ["Eric Wieser"], type: "lecture", abstract: "Detailed abstract will be posted soon." },
+        { id: "fri-1430-gdm", day: "2025-12-12", start: "14:30", end: "15:15", title: "Lecture (title TBA)", speakers: ["Google DeepMind (TBD)"], type: "lecture", abstract: "Detailed abstract will be posted soon." },
         { id: "fri-1515-coffee", day: "2025-12-12", start: "15:15", end: "15:45", title: "Coffee Break", speakers: [], type: "meal", abstract: "Closing coffee, perfect for exchanging contacts and lingering reflections." },
         { id: "fri-1545-presentations", day: "2025-12-12", start: "15:45", end: "17:00", title: "Project Presentations", speakers: [], type: "project", abstract: "Teams present outcomes of the project track." }
     ]
