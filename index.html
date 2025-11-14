@@ -408,7 +408,6 @@
             padding: 0.6rem 0.75rem;
             border: 1px solid transparent;
             background: rgba(108, 117, 125, 0.12);
-            color: inherit;
             box-shadow: 0 0.35rem 1rem rgba(13, 31, 45, 0.12);
             overflow: hidden;
             font-size: 0.9rem;
@@ -451,23 +450,52 @@
             box-shadow: 0 0.25rem 0.8rem rgba(13, 31, 45, 0.1);
         }
 
-        .schedule-event--talk,
-        .schedule-event--workshop,
+        .schedule-event--registration {
+            background: linear-gradient(140deg, rgba(255, 255, 255, 0.8), rgba(40, 40, 50, 0.8));
+            border-color: rgba(138, 138, 154, 0.44);
+            color: #1f2937;
+        }
+
+        .schedule-event--welcome {
+            background: linear-gradient(140deg, rgba(255, 255, 255, 0.8), rgba(40, 40, 50, 0.8));
+            border-color: rgba(138, 138, 154, 0.44);
+            color: #1f2937;
+        }
+
+        .schedule-event--lecture {
+            background: linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(187, 46, 41, 0.5));
+            border-color: rgba(187, 46, 41, 0.46);
+            color: #7f1d1d;
+        }
+
+        .schedule-event--tutorial {
+            background: linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(30, 144, 255, 0.5));
+            border-color: rgba(30, 144, 255, 0.65);
+            color: #1e3a8a;
+        }
+
+        .schedule-event--installation {
+            background: linear-gradient(140deg, rgba(255, 255, 255, 0.8), rgba(40, 40, 50, 0.8));
+            border-color: rgba(138, 138, 154, 0.44);
+            color: #1f2937;
+        }
+
         .schedule-event--panel {
-            background: rgba(187, 46, 41, 0.18);
-            border-color: rgba(187, 46, 41, 0.35);
+            background: linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(184, 134, 11, 0.5));
+            border-color: rgba(184, 134, 11, 0.45);
+            color: #92400e;
         }
 
-        .schedule-event--break,
-        .schedule-event--meal {
-            background: rgba(0, 85, 102, 0.12);
-            border-color: rgba(0, 85, 102, 0.25);
-        }
-
-        .schedule-event--session,
         .schedule-event--project {
-            background: rgba(33, 37, 41, 0.12);
-            border-color: rgba(33, 37, 41, 0.2);
+            background: linear-gradient(140deg, rgba(255, 255, 255, 0.8), rgba(40, 40, 50, 0.8));
+            border-color: rgba(138, 138, 154, 0.44);
+            color: #1f2937;
+        }
+
+        .schedule-event--meal {
+            background: linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(0, 77, 64, 0.55));
+            border-color: rgba(0, 77, 64, 0.45);
+            color: #0d4f3c;
         }
 
         .schedule-legend {
@@ -983,7 +1011,7 @@
     <script src="assets/js/schedule-data.js"></script>
     <script>
         (function () {
-            const defaultConfig = { startTime: '08:00', endTime: '19:00', slotMinutes: 15, slotHeight: 24 };
+            const defaultConfig = { startTime: '08:00', endTime: '23:00', slotMinutes: 15, slotHeight: 24 };
             const scheduleData = window.ItaleanSchedule || {};
             const scheduleDays = Array.isArray(scheduleData.days) ? scheduleData.days : [];
             const rawEvents = Array.isArray(scheduleData.events) ? scheduleData.events : [];
@@ -1094,7 +1122,12 @@
                     const visibleLabel = event.label || ((event.speakers && event.speakers.length) ? event.speakers.join(' & ') : event.title);
                     const labelSpan = document.createElement('span');
                     labelSpan.className = 'schedule-event-label';
-                    labelSpan.textContent = visibleLabel;
+                    const labelLines = visibleLabel.split('\n');
+                    labelSpan.textContent = labelLines[0] || '';
+                    for (let i = 1; i < labelLines.length; i += 1) {
+                        labelSpan.appendChild(document.createElement('br'));
+                        labelSpan.appendChild(document.createTextNode(labelLines[i]));
+                    }
                     element.appendChild(labelSpan);
 
                     if (height <= slotHeight * 1.25) {
