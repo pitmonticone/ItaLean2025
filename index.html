@@ -474,6 +474,12 @@
             color: #1e3a8a;
         }
 
+        .schedule-event--challenge {
+            background: linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(168, 85, 247, 0.5));
+            border-color: rgba(168, 85, 247, 0.5);
+            color: #4c1d95;
+        }
+
         .schedule-event--installation {
             background: linear-gradient(140deg, rgba(255, 255, 255, 0.8), rgba(40, 40, 50, 0.8));
             border-color: rgba(138, 138, 154, 0.44);
@@ -1185,7 +1191,7 @@
                 modalTime.textContent = formatTimeRange(scheduleEvent, dayInfo);
 
                 const abstractText = scheduleEvent.abstract && scheduleEvent.abstract.trim() ? scheduleEvent.abstract : 'Details coming soon.';
-                modalAbstract.textContent = abstractText;
+                modalAbstract.innerHTML = abstractText;
                 queueMathTypeset(modalAbstract);
                 scheduleModal.show();
             });
