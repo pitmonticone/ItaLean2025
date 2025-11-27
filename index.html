@@ -1018,7 +1018,8 @@
                 </div>
                 <div class="modal-body">
                     <p class="mb-1 text-muted" id="scheduleEventTime"></p>
-                    <p class="fw-semibold mb-3" id="scheduleEventSpeakers"></p>
+                    <p class="fw-semibold mb-1" id="scheduleEventSpeakers"></p>
+                    <p class="mb-3 text-muted" id="scheduleEventChair"></p>
                     <p class="mb-0" id="scheduleEventAbstract"></p>
                 </div>
             </div>
@@ -1165,6 +1166,7 @@
             const modalElement = document.getElementById('scheduleEventModal');
             const modalTitle = document.getElementById('scheduleEventModalLabel');
             const modalSpeakers = document.getElementById('scheduleEventSpeakers');
+            const modalChair = document.getElementById('scheduleEventChair');
             const modalTime = document.getElementById('scheduleEventTime');
             const modalAbstract = document.getElementById('scheduleEventAbstract');
             const scheduleModal = modalElement && window.bootstrap ? bootstrap.Modal.getOrCreateInstance(modalElement) : null;
@@ -1186,6 +1188,10 @@
                 const speakers = Array.isArray(scheduleEvent.speakers) ? scheduleEvent.speakers.filter(Boolean) : [];
                 modalSpeakers.textContent = speakers.join(', ');
                 modalSpeakers.classList.toggle('d-none', speakers.length === 0);
+
+                const chair = scheduleEvent.chair && scheduleEvent.chair.trim() ? scheduleEvent.chair : '';
+                modalChair.textContent = chair ? `Chair: ${chair}` : '';
+                modalChair.classList.toggle('d-none', !chair);
 
                 const dayInfo = scheduleDays.find(day => day.key === scheduleEvent.day);
                 modalTime.textContent = formatTimeRange(scheduleEvent, dayInfo);
