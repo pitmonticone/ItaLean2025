@@ -1,1 +1,1 @@
-import ItaLean.Example
+import ItaLean.Test
