@@ -323,6 +323,74 @@
             max-width: 220px;
         }
 
+        .hero-fab-stack {
+            z-index: 2;
+        }
+
+        .hero-icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            padding: 0;
+            margin: 0;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            text-decoration: none;
+            color: #24292f;
+            transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.15s ease;
+        }
+
+        .hero-icon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+            background: #fafafa;
+        }
+
+        .hero-icon-btn:active {
+            transform: translateY(0);
+        }
+
+        .hero-icon-btn svg {
+            width: 34px;
+            height: 34px;
+            flex-shrink: 0;
+        }
+
+        .hero-icon-btn.youtube-btn {
+            color: #ff0000;
+        }
+
+        .hero-icon-btn.youtube-btn:hover {
+            background: #fff5f5;
+        }
+
+        .hero-icon-btn.github-btn:hover {
+            background: #f6f8fa;
+        }
+
+        @media (max-width: 767.98px) {
+            .hero-fab-stack {
+                top: auto !important;
+                bottom: 0.5rem;
+                right: 0.75rem;
+                left: auto;
+            }
+
+            .hero-icon-btn {
+                width: 46px;
+                height: 46px;
+            }
+
+            .hero-icon-btn svg {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
         .schedule-wrapper {
             --slot-height: 24px;
             overflow-x: auto;
@@ -644,17 +712,15 @@
     <!-- Hero Section -->
     <section id="top" class="hero-section py-5">
         <div class="container position-relative">
-            <div class="position-absolute top-0 end-0 mt-2 me-2 d-flex flex-column align-items-end gap-2">
-                <a href="https://github.com/pitmonticone/ItaLean2025" class="presenter-inline" target="_blank" rel="noopener noreferrer"
-                    aria-label="View the ItaLean 2025 GitHub repository" style="padding: 0.35rem 0.45rem;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 16 16" fill="currentColor" class="presenter-inline-logo" style="height: 44px; width: 44px; max-width: none;">
+            <div class="position-absolute top-0 end-0 mt-2 me-2 d-flex flex-column align-items-end gap-2 hero-fab-stack">
+                <a href="https://github.com/pitmonticone/ItaLean2025" class="hero-icon-btn github-btn" target="_blank" rel="noopener noreferrer" aria-label="View the ItaLean 2025 GitHub repository">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
                         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
                     </svg>
                 </a>
-                <a href="https://www.youtube.com/@ItaLeanConference" class="presenter-inline" target="_blank" rel="noopener noreferrer"
-                    aria-label="Visit the ItaLean 2025 YouTube channel" title="ItaLean 2025 on YouTube" style="padding: 0.35rem 0.45rem; color: #ff0000;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 24 24" fill="currentColor" class="presenter-inline-logo" style="height: 44px; width: 44px; max-width: none;">
-                        <path d="M23.5 6.2s-.2-1.6-.8-2.3c-.7-.8-1.5-.8-1.9-.9C17.8 2.8 12 2.8 12 2.8h0s-5.8 0-8.8.2c-.4.1-1.2.1-1.9.9-.6.7-.8 2.3-.8 2.3S0 8.1 0 10v1.9c0 1.9.2 3.8.2 3.8s.2 1.6.8 2.3c.7.8 1.7.8 2.1.9 1.5.1 8.7.2 8.7.2s5.8 0 8.8-.2c.4-.1 1.2-.1 1.9-.9.6-.7.8-2.3.8-2.3s.2-1.9.2-3.8V10c0-1.9-.2-3.8-.2-3.8zM9.5 13.7V7.9l5.7 2.9-5.7 2.9z"/>
+                <a href="https://www.youtube.com/@ItaLeanConference" class="hero-icon-btn youtube-btn" target="_blank" rel="noopener noreferrer" aria-label="Visit the ItaLean 2025 YouTube channel" title="ItaLean 2025 on YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
                     </svg>
                 </a>
             </div>
