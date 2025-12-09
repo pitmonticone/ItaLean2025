@@ -5,6 +5,50 @@ open Real
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/-!
+# Reading and Writing Lean in practice
+
+A practical introduction to formalising mathematics in Lean for the working mathematician.
+-/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /-!
 # Reading and Writing Lean in practice
 
@@ -150,7 +194,7 @@ def myFavouriteNumber : ℕ := 7
 /- For any expression in Lean, I can use `sorry` as a placeholder to mean "I'll fill this in
 later". Any definition or proof that uses `sorry` will give a warning. Let's fill this one in now
 with your favourite number! -/
-def yourFavouriteNumber : ℕ := sorry
+def yourFavouriteNumber : ℕ := 42
 
 
 #check myFavouriteNumber
@@ -489,14 +533,14 @@ Let's look at an example.
 
 /-- A sequence `u` of real numbers converges to `l` if `∀ ε > 0, ∃ N, ∀ n ≥ N, |u_n - l| ≤ ε`.
 This condition will be spelled `seq_limit u l`. -/
-def seq_limit (u : ℕ → ℝ) (l : ℝ) :=
+def seq_limit (u : ℕ → ℝ) (l : ℝ) : Prop :=
   ∀ ε > 0, ∃ N, ∀ n ≥ N, |u n - l| ≤ ε
 
 
 
 
 /- In the above definition, note that the `n`-th term of the sequence `u` is denoted
-simply by `u n`. -/
+simply by `u n` not u(n). -/
 
 /-- A function `f : ℝ → ℝ` is continuous at `x₀` if
 `∀ ε > 0, ∃ δ > 0, ∀ x, |x - x₀| ≤ δ ⇒ |f(x) - f(x₀)| ≤ ε`.
