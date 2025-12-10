@@ -1,6 +1,7 @@
 import ItaLean.Damiano.Inspect
 
 open Lean Elab Command Tactic
+#allow_unused_tactic! Parser.Tactic.runTac
 
 /-- The final auxiliary lemma in the proof of Fermat's Last Theorem! -/
 axiom FLTAuxLemma {α} : α
@@ -200,6 +201,7 @@ elab "dbg_trace_goal" : tactic => do
   dbg_trace "The expression starts as an '{tgt.ctorName}'."
   dbg_trace tgt
 
+-- silence the `unusedVariable` linter!
 example : a = 0 := by
   dbg_trace_goal
   assumption
@@ -210,13 +212,15 @@ example : a = 0 := by
 This is a very delicate issue, since it is very hard to get it exactly right.
 -/
 
-elab "close_if_true" : tactic => do
+elab (name := closeIfTrueTac) "close_if_true" : tactic => do
   let tgt ← getMainTarget
   match tgt with
   | .const ``True [] => evalTactic (← `(tactic| trivial))
   | .const ``False [] => logInfo "Hopefully there are some contradictory hypotheses in scope!"
   | e =>
     logWarning m!"The goal `{e}` is neither `{.ofConstName ``True}` nor `{.ofConstName ``False}`!"
+
+#allow_unused_tactic closeIfTrueTac
 
 example : True := by close_if_true
 example : False := by close_if_true; fermat
