@@ -41,7 +41,7 @@ elab "fermat" : tactic => withMainContext do
   evalTactic (← `(tactic| exact FLTAuxLemma))
   --refineCore (mkIdent ``FLTAuxLemma) `refine (allowNaturalHoles := false)
 
-/-
+/-!
 # Tactics and writing proofs
 
 When writing a "tactic proof", you have access to
@@ -108,13 +108,13 @@ but they could also be natural number, or really any term of any type.
 So, how are `MVarId`s implemented?
 -/
 #check MVarId
-/-
+/-!
 Well, that was illuminating!
 
 More information is stored in the `MetavarContext`.
 -/
 #check MetavarContext
-/-
+/-!
 As you can see, there is *a lot* going on behind the scenes.
 -/
 
@@ -136,7 +136,7 @@ example : True := by
   have g := 0
   fermat
 
-/-
+/-!
 # `Expr`essions
 
 After so much talking about proof terms, let's take a look at `Expr`essions, the main inductive
@@ -175,7 +175,7 @@ example : Expr → Unit
   dbg_trace es
   --logInfo es
 
-/-
+/-!
 Let's see some real life `Expr`essions.
 -/
 variable {a : Nat} (h : a = 0)
@@ -190,7 +190,7 @@ example : a = 0 := by
     -- We also print the whole `tgt` expression.
     dbg_trace tgt
   assumption
-/-
+/-!
 *Exercise*. implement the `dbg_trace_goal` tactic that performs the analogue of the
 `run_tac ...` code above.
 
@@ -206,7 +206,7 @@ example : a = 0 := by
   dbg_trace_goal
   assumption
 
-/-
+/-!
 # Matching on `Expr`essions
 
 This is a very delicate issue, since it is very hard to get it exactly right.
@@ -226,7 +226,7 @@ example : True := by close_if_true
 example : False := by close_if_true; fermat
 example : 0 = 0 := by close_if_true; rfl
 
-/-
+/-!
 This all looks good!
 
 However...
@@ -237,12 +237,15 @@ example : True := by
   dbg_trace_goal
   trivial
 
-/-
+/-!
 # `W`eak `H`ead `N`ormal `F`orms
 -/
 #check Meta.whnf
 #check Meta.whnfR
 
+/-!
+
+-/
 /-
 # What about `#print axioms` not catching `FLTAuxLemma`?
 -/
