@@ -323,6 +323,74 @@
             max-width: 220px;
         }
 
+        .hero-fab-stack {
+            z-index: 2;
+        }
+
+        .hero-icon-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            padding: 0;
+            margin: 0;
+            border-radius: 50%;
+            background: #fff;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            text-decoration: none;
+            color: #24292f;
+            transition: transform 0.15s ease, box-shadow 0.2s ease, background-color 0.15s ease;
+        }
+
+        .hero-icon-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+            background: #fafafa;
+        }
+
+        .hero-icon-btn:active {
+            transform: translateY(0);
+        }
+
+        .hero-icon-btn svg {
+            width: 34px;
+            height: 34px;
+            flex-shrink: 0;
+        }
+
+        .hero-icon-btn.youtube-btn {
+            color: #ff0000;
+        }
+
+        .hero-icon-btn.youtube-btn:hover {
+            background: #fff5f5;
+        }
+
+        .hero-icon-btn.github-btn:hover {
+            background: #f6f8fa;
+        }
+
+        @media (max-width: 767.98px) {
+            .hero-fab-stack {
+                top: auto !important;
+                bottom: 0.5rem;
+                right: 0.75rem;
+                left: auto;
+            }
+
+            .hero-icon-btn {
+                width: 46px;
+                height: 46px;
+            }
+
+            .hero-icon-btn svg {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
         .schedule-wrapper {
             --slot-height: 24px;
             overflow-x: auto;
@@ -361,9 +429,10 @@
             width: 100%;
             font-size: 0.8rem;
             color: #6c757d;
-            transform: translateY(-50%);
+            transform: translateY(calc(-50% + (var(--slot-height) * 0.65)));
             padding-right: 0.5rem;
             text-align: right;
+            z-index: 2;
         }
 
         .schedule-day-column {
@@ -380,6 +449,10 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
+        }
+
+        .schedule-time-header {
+            border-bottom: none;
         }
 
         .schedule-day-label {
@@ -400,6 +473,26 @@
             background-image: repeating-linear-gradient(to bottom, rgba(13, 31, 45, 0.06) 0, rgba(13, 31, 45, 0.06) 1px, transparent 1px, transparent calc(var(--slot-height) * 2));
         }
 
+        .schedule-day-body::before,
+        .schedule-time-body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .schedule-day-body::before {
+            background: rgba(255, 255, 255, 0.88);
+        }
+
+        .schedule-time-body::before {
+            background: #ffffff;
+        }
+
         .schedule-event {
             position: absolute;
             inset-inline-start: 0;
@@ -412,6 +505,7 @@
             overflow: hidden;
             font-size: 0.9rem;
             line-height: 1.3;
+            z-index: 2;
         }
 
         .schedule-event--compact {
@@ -474,7 +568,7 @@
             color: #1e3a8a;
         }
 
-        .schedule-event--challenge {
+        .schedule-event--photo {
             background: linear-gradient(140deg, rgba(255, 255, 255, 0.92), rgba(168, 85, 247, 0.5));
             border-color: rgba(168, 85, 247, 0.5);
             color: #4c1d95;
@@ -643,7 +737,19 @@
 
     <!-- Hero Section -->
     <section id="top" class="hero-section py-5">
-        <div class="container">
+        <div class="container position-relative">
+            <div class="position-absolute top-0 end-0 mt-2 me-2 d-flex flex-column align-items-end gap-2 hero-fab-stack">
+                <a href="https://github.com/pitmonticone/ItaLean2025" class="hero-icon-btn github-btn" target="_blank" rel="noopener noreferrer" aria-label="View the ItaLean 2025 GitHub repository">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                    </svg>
+                </a>
+                <a href="https://www.youtube.com/@ItaLeanConference" class="hero-icon-btn youtube-btn" target="_blank" rel="noopener noreferrer" aria-label="Visit the ItaLean 2025 YouTube channel" title="ItaLean 2025 on YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                    </svg>
+                </a>
+            </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8 text-center">
                     <h1 class="display-4 fw-bold mb-3">ItaLean 2025</h1>
@@ -680,85 +786,68 @@
                 </div>
             </div>
 
-            <!-- Applications Section -->
+            <!-- Schedule Section -->
             <div class="row mb-5">
                 <div class="col-12">
-                    <h2 id="applications" class="section-title mb-4">Participate</h2>
+                    <h2 id="schedule" class="section-title mb-4">Schedule</h2>
                     <div class="card border-0 shadow-sm">
                         <div class="card-body">
-                            <p class="card-text">Applications to participate in ItaLean 2025 are now open. The application deadline is Friday, November 28.</p>
-                            <p><strong>Participation is free of charge</strong> and includes access to all conference sessions. A limited amount of financial support for accommodation may be available. Applicants may indicate their need for support in the application form.</p>
-                            <p>Applicants are encouraged to include a CV with their submission.</p>
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSe8g1hqrrNa4YH6H0-nk2l1g32EBePtuqB3GnnFieWukuW2pA/viewform?usp=header"
-                                class="btn btn-custom text-white" target="_blank">Apply now</a>
+                            <p class="text-muted small mb-3">Click a talk to read the title and abstract. Times shown below are in Central European Time.</p>
+                            <div class="schedule-wrapper">
+                                <div id="scheduleGrid" class="schedule-grid">
+                                    <div class="text-center py-4 text-muted" id="scheduleFallback">Loading schedule...</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <!-- Scam Warning Alert -->
-                    <div class="scam-warning mt-4">
-                        <h5>
-                            <span class="scam-warning-icon">⚠️</span>
-                            <span>Beware of Scam Emails</span>
-                        </h5>
-                        <p>We have been made aware that some participants have received <strong>fraudulent emails</strong> about hotel reservations for ItaLean 2025.</p>
-                        <p>These emails are <strong>not from the conference organizers</strong> and appear to be phishing attempts to collect personal information and payment details.</p>
                     </div>
                 </div>
             </div>
 
-
-            <!-- Organizers Section -->
+            <!-- Venue Section -->
             <div class="row mb-5">
                 <div class="col-12">
-                    <h2 id="organizers" class="section-title mb-4">Organizers</h2>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <a href="https://www.linkedin.com/in/eugenio-cainelli" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title mb-2">Eugenio Cainelli</h6>
-                                    <p class="card-text text-muted">University of Bologna</p>
+                    <h2 id="venue" class="section-title mb-4">Venues</h2>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-4 mb-3 mb-md-0">
+                                    <div class="d-flex align-items-start">
+                                        <span class="badge rounded-pill me-2" style="background-color: #E53935; font-size: 0.9rem; padding: 0.5rem 0.75rem;">A</span>
+                                        <div>
+                                            <h6 class="mb-1" style="color: #bb2e29;">Main Conference Venue</h6>
+                                            <p class="mb-1"><strong>Fondazione Lercaro</strong></p>
+                                            <p class="text-muted small mb-0">Via Riva di Reno 55</p>
+                                            <p class="text-muted small mb-0"><em>All talks and sessions</em></p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="https://www.unibo.it/sitoweb/marco.lenci" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title mb-2">Marco Lenci</h6>
-                                    <p class="card-text text-muted">University of Bologna</p>
+                                <div class="col-md-4 mb-3 mb-md-0">
+                                    <div class="d-flex align-items-start">
+                                        <span class="badge rounded-pill me-2" style="background-color: #43A047; font-size: 0.9rem; padding: 0.5rem 0.75rem;">B</span>
+                                        <div>
+                                            <h6 class="mb-1" style="color: #bb2e29;">Project Work (Wed)</h6>
+                                            <p class="mb-1"><strong>Dept. of Mathematics</strong></p>
+                                            <p class="text-muted small mb-0">Piazza di Porta San Donato 5</p>
+                                            <p class="text-muted small mb-0"><em>Wednesday afternoon</em></p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="https://github.com/LorenzoLuccioli" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title mb-2">Lorenzo Luccioli</h6>
-                                    <p class="card-text text-muted">University of Bologna</p>
+                                <div class="col-md-4">
+                                    <div class="d-flex align-items-start">
+                                        <span class="badge rounded-pill me-2" style="background-color: #1E88E5; font-size: 0.9rem; padding: 0.5rem 0.75rem;">C</span>
+                                        <div>
+                                            <h6 class="mb-1" style="color: #bb2e29;">Social Dinner (Wed)</h6>
+                                            <p class="mb-1"><strong>Ristorante Gurmé</strong></p>
+                                            <p class="text-muted small mb-0">Via Zaccherini Alvisi 16</p>
+                                            <p class="text-muted small mb-0"><em>Wednesday evening</em></p>
+                                        </div>
+                                    </div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="https://github.com/pitmonticone" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title mb-2">Pietro Monticone</h6>
-                                    <p class="card-text text-muted">University of Trento</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="https://giovannipaolini.org" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title mb-2">Giovanni Paolini</h6>
-                                    <p class="card-text text-muted">University of Bologna</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="https://www.unibo.it/sitoweb/claudio.sacerdoticoen" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title mb-2">Claudio Sacerdoti Coen</h6>
-                                    <p class="card-text text-muted">University of Bologna</p>
-                                </div>
-                            </a>
+                            </div>
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1gx22c8nLv-PL_VQtuc6vhdwIcVj_lg4&ehbc=2E312F&noprof=1" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing all ItaLean 2025 venues in Bologna"></iframe>
+                            </div>
+                            <p class="text-muted small mt-2 mb-0 text-center"><a href="https://www.google.com/maps/dir/Fondazione+Lercaro,+Via+Riva+di+Reno,+55,+Bologna/Dipartimento+di+Matematica,+Piazza+di+Porta+San+Donato,+5,+Bologna/Ristorante+Gurm%C3%A9,+Via+Santo+Stefano,+Bologna" target="_blank" rel="noopener noreferrer" class="text-decoration-underline" style="color: #bb2e29;">Open in Google Maps →</a></p>
                         </div>
                     </div>
                 </div>
@@ -806,6 +895,14 @@
                                 <div class="card-body text-center">
                                     <h6 class="card-title mb-2">Yann Fleureau</h6>
                                     <p class="card-text text-muted">Project Numina</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://thefundamentaltheor3m.github.io" class="card shadow-sm h-100 speaker-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Sidharth Hariharan</h6>
+                                    <p class="card-text text-muted">Carnegie Mellon University</p>
                                 </div>
                             </a>
                         </div>
@@ -933,72 +1030,86 @@
                 </div>
             </div>
 
-            <!-- Venue Section -->
+            <!-- Organizers Section -->
             <div class="row mb-5">
                 <div class="col-12">
-                    <h2 id="venue" class="section-title mb-4">Venues</h2>
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body">
-                            <div class="row mb-4">
-                                <div class="col-md-4 mb-3 mb-md-0">
-                                    <div class="d-flex align-items-start">
-                                        <span class="badge rounded-pill me-2" style="background-color: #E53935; font-size: 0.9rem; padding: 0.5rem 0.75rem;">A</span>
-                                        <div>
-                                            <h6 class="mb-1" style="color: #bb2e29;">Main Conference Venue</h6>
-                                            <p class="mb-1"><strong>Fondazione Lercaro</strong></p>
-                                            <p class="text-muted small mb-0">Via Riva di Reno 55</p>
-                                            <p class="text-muted small mb-0"><em>All talks and sessions</em></p>
-                                        </div>
-                                    </div>
+                    <h2 id="organizers" class="section-title mb-4">Organizers</h2>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <a href="https://www.linkedin.com/in/eugenio-cainelli" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Eugenio Cainelli</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
                                 </div>
-                                <div class="col-md-4 mb-3 mb-md-0">
-                                    <div class="d-flex align-items-start">
-                                        <span class="badge rounded-pill me-2" style="background-color: #43A047; font-size: 0.9rem; padding: 0.5rem 0.75rem;">B</span>
-                                        <div>
-                                            <h6 class="mb-1" style="color: #bb2e29;">Project Work (Wed)</h6>
-                                            <p class="mb-1"><strong>Dept. of Mathematics</strong></p>
-                                            <p class="text-muted small mb-0">Piazza di Porta San Donato 5</p>
-                                            <p class="text-muted small mb-0"><em>Wednesday afternoon</em></p>
-                                        </div>
-                                    </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://www.unibo.it/sitoweb/marco.lenci" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Marco Lenci</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="d-flex align-items-start">
-                                        <span class="badge rounded-pill me-2" style="background-color: #1E88E5; font-size: 0.9rem; padding: 0.5rem 0.75rem;">C</span>
-                                        <div>
-                                            <h6 class="mb-1" style="color: #bb2e29;">Social Dinner (Wed)</h6>
-                                            <p class="mb-1"><strong>Ristorante Gurmé</strong></p>
-                                            <p class="text-muted small mb-0">Via Zaccherini Alvisi 16</p>
-                                            <p class="text-muted small mb-0"><em>Wednesday evening</em></p>
-                                        </div>
-                                    </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://github.com/LorenzoLuccioli" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Lorenzo Luccioli</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
                                 </div>
-                            </div>
-                            <div class="ratio ratio-16x9">
-                                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1gx22c8nLv-PL_VQtuc6vhdwIcVj_lg4&ehbc=2E312F&noprof=1" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing all ItaLean 2025 venues in Bologna"></iframe>
-                            </div>
-                            <p class="text-muted small mt-2 mb-0 text-center"><a href="https://www.google.com/maps/dir/Fondazione+Lercaro,+Via+Riva+di+Reno,+55,+Bologna/Dipartimento+di+Matematica,+Piazza+di+Porta+San+Donato,+5,+Bologna/Ristorante+Gurm%C3%A9,+Via+Santo+Stefano,+Bologna" target="_blank" rel="noopener noreferrer" class="text-decoration-underline" style="color: #bb2e29;">Open in Google Maps →</a></p>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://github.com/pitmonticone" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Pietro Monticone</h6>
+                                    <p class="card-text text-muted">University of Trento</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://giovannipaolini.org" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Giovanni Paolini</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://www.unibo.it/sitoweb/claudio.sacerdoticoen" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Claudio Sacerdoti Coen</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
 
-                <!-- Schedule Section -->
-                <div class="row mb-5">
-                    <div class="col-12">
-                        <h2 id="schedule" class="section-title mb-4">Schedule</h2>
-                        <div class="card border-0 shadow-sm">
-                            <div class="card-body">
-                                <p class="text-muted small mb-3">Click a talk to read the title and abstract. Times shown below are in Central European Time.</p>
-                                <div class="schedule-wrapper">
-                                    <div id="scheduleGrid" class="schedule-grid">
-                                        <div class="text-center py-4 text-muted" id="scheduleFallback">Loading schedule...</div>
-                                    </div>
-                                </div>
-                            </div>
+            <!-- Applications Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 id="applications" class="section-title mb-4">Participate</h2>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <p class="card-text">Applications to participate in ItaLean 2025 are now closed. The application deadline was Friday, November 28.</p>
+                            <p><strong>Participation is free of charge</strong> and includes access to all conference sessions. A limited amount of financial support for accommodation may be available. Applicants may indicate their need for support in the application form.</p>
+                            <p>Applicants are encouraged to include a CV with their submission.</p>
                         </div>
                     </div>
+
+                    <!-- Scam Warning Alert -->
+                    <div class="scam-warning mt-4">
+                        <h5>
+                            <span class="scam-warning-icon">⚠️</span>
+                            <span>Beware of Scam Emails</span>
+                        </h5>
+                        <p>We have been made aware that some participants have received <strong>fraudulent emails</strong> about hotel reservations for ItaLean 2025.</p>
+                        <p>These emails are <strong>not from the conference organizers</strong> and appear to be phishing attempts to collect personal information and payment details.</p>
+                    </div>
                 </div>
+            </div>
 
             <!-- Acknowledgement Section -->
             <div class="row mb-5">
@@ -1010,7 +1121,6 @@
                     </div>
                 </div>
             </div>
-
 
             <!-- Sponsors Section -->
             <div class="row mb-5">
