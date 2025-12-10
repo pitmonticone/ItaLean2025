@@ -24,7 +24,8 @@ For safety reasons, running the `fermat` tactic requires elevated universe permi
 as its correctness certificate is known to exceed the maximum cardinality permitted
 by mortal comprehension.
 
-Users have reported that repeated invocations may cause Lean to emit a quiet but decisive “done,” indicating that *mathematics has been successfully completed*.
+Users have reported that repeated invocations may cause Lean to emit a quiet but decisive “done,”
+indicating that *mathematics has been successfully completed*.
 
 > If you want it even wilder (e.g., with recursion paradoxes, time travel, cosmic entities, or kernel hallucinations), I can dial it up further.
 
@@ -211,7 +212,8 @@ elab "close_if_true" : tactic => do
   match tgt with
   | .const ``True [] => evalTactic (← `(tactic| trivial))
   | .const ``False [] => logInfo "Hopefully there are some contradictory hypotheses in scope!"
-  | e => logWarning m!"The goal `{e}` is neither `{.ofConstName ``True}` nor `{.ofConstName ``False}`!"
+  | e =>
+    logWarning m!"The goal `{e}` is neither `{.ofConstName ``True}` nor `{.ofConstName ``False}`!"
 
 example : True := by close_if_true
 example : False := by close_if_true; fermat
