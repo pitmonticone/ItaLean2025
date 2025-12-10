@@ -1,4 +1,3 @@
-import Lean
 import ItaLean.Damiano.ShadyAuxLemmas
 
 /-
