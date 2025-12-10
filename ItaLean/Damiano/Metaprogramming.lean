@@ -1,5 +1,5 @@
 import Lean
-import ItaLean.ShadyAuxLemmas
+import ItaLean.Damiano.ShadyAuxLemmas
 
 /-
 I was going to give a metaprogramming talk, but then I found a proof of Fermat's Last Theorem,
