@@ -5,9 +5,6 @@ open Lean Elab Command Tactic
 /-- The final auxiliary lemma in the proof of Fermat's Last Theorem! -/
 axiom FLTAuxLemma {α} : α
 
-theorem X : if 1 = 0 then False else 2 + 0 * 1 = 3 - 1 := by simp
-#print X
-
 /--
 In Lean `4.Ω`, the `fermat` tactic leverages a *transfinite* cascade of reflective
 *meta-induction* engines to produce a fully verified proof of *Fermat’s Last Theorem*
@@ -100,6 +97,12 @@ To some extent, you can think of them as underscores `_`:
 in `refine le_antisymm ?_ ?_`, the two `?_` signal Lean that we want those to proofs to be exposed
 as new goals to us.
 Thus, Lean generates the appropriate `MVarId`s and the proof can go on.
+
+In the Infoview, you may have seen `?m.13`: this is a typical way in which Lean prints
+metavariables.
+
+They are "place-holders" for an actual term that should be provided, typically a proof,
+but they could also be natural number, or really any term of any type.
 
 So, how are `MVarId`s implemented?
 -/
