@@ -244,8 +244,22 @@ example : True := by
 #check Meta.whnfR
 
 /-!
+As you saw, constructing and matching on `Expr`essions can get tricky.
 
+So, whenever you think "I can construct this term by hand", you should immediately stop,
+and instead ask yourself "How can I avoid writing this term by hand?".
+
+There are lots of functions that will help constructing expressions that you "could" construct
+by hand, but shouldn't!
 -/
+
+#check Lean.Meta.mkAppM
+#check Lean.Meta.mkAppM'
+#check Lean.Meta.mkFreshExprMVar
+#check Lean.Meta.mkFreshExprSyntheticOpaqueMVar
+#check Lean.Meta.mkConstWithFreshMVarLevels
+-- and so on!
+
 /-
 # What about `#print axioms` not catching `FLTAuxLemma`?
 -/
