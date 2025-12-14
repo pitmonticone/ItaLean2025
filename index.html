@@ -720,16 +720,13 @@
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="#top">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#applications">Participate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#photos">Photo Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="#organizers">Organizers</a></li>
-<!--                    <li class="nav-item"><a class="nav-link" href="#fees">Fees</a></li>-->
-<!--                    <li class="nav-item"><a class="nav-link" href="#accommodation">Accommodation</a></li>-->
                     <li class="nav-item"><a class="nav-link" href="#speakers">Speakers</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#venue">Venue</a></li>
                     <li class="nav-item"><a class="nav-link" href="#schedule">Schedule</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#venue">Venue</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#applications">Participate</a></li>
                     <li class="nav-item"><a class="nav-link" href="#sponsors">Sponsors</a></li>
-<!--                    <li class="nav-item"><a class="nav-link" href="#timetable">Timetable</a></li>-->
-<!--                    <li class="nav-item"><a class="nav-link" href="#location">Location</a></li>-->
                 </ul>
             </div>
         </div>
@@ -786,68 +783,82 @@
                 </div>
             </div>
 
-            <!-- Schedule Section -->
+            <!-- Photo Gallery Section -->
             <div class="row mb-5">
                 <div class="col-12">
-                    <h2 id="schedule" class="section-title mb-4">Schedule</h2>
+                    <h2 id="photos" class="section-title mb-4">Photo Gallery</h2>
                     <div class="card border-0 shadow-sm">
                         <div class="card-body">
-                            <p class="text-muted small mb-3">Click a talk to read the title and abstract. Times shown below are in Central European Time.</p>
-                            <div class="schedule-wrapper">
-                                <div id="scheduleGrid" class="schedule-grid">
-                                    <div class="text-center py-4 text-muted" id="scheduleFallback">Loading schedule...</div>
+                            <div id="photoCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner" id="carousel-images-container">
+                                    <!-- Images will be loaded here dynamically -->
                                 </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%;"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#photoCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%;"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Venue Section -->
+            <!-- Organizers Section -->
             <div class="row mb-5">
                 <div class="col-12">
-                    <h2 id="venue" class="section-title mb-4">Venues</h2>
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body">
-                            <div class="row mb-4">
-                                <div class="col-md-4 mb-3 mb-md-0">
-                                    <div class="d-flex align-items-start">
-                                        <span class="badge rounded-pill me-2" style="background-color: #E53935; font-size: 0.9rem; padding: 0.5rem 0.75rem;">A</span>
-                                        <div>
-                                            <h6 class="mb-1" style="color: #bb2e29;">Main Conference Venue</h6>
-                                            <p class="mb-1"><strong>Fondazione Lercaro</strong></p>
-                                            <p class="text-muted small mb-0">Via Riva di Reno 55</p>
-                                            <p class="text-muted small mb-0"><em>All talks and sessions</em></p>
-                                        </div>
-                                    </div>
+                    <h2 id="organizers" class="section-title mb-4">Organizers</h2>
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <a href="https://www.linkedin.com/in/eugenio-cainelli" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Eugenio Cainelli</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
                                 </div>
-                                <div class="col-md-4 mb-3 mb-md-0">
-                                    <div class="d-flex align-items-start">
-                                        <span class="badge rounded-pill me-2" style="background-color: #43A047; font-size: 0.9rem; padding: 0.5rem 0.75rem;">B</span>
-                                        <div>
-                                            <h6 class="mb-1" style="color: #bb2e29;">Project Work (Wed)</h6>
-                                            <p class="mb-1"><strong>Dept. of Mathematics</strong></p>
-                                            <p class="text-muted small mb-0">Piazza di Porta San Donato 5</p>
-                                            <p class="text-muted small mb-0"><em>Wednesday afternoon</em></p>
-                                        </div>
-                                    </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://www.unibo.it/sitoweb/marco.lenci" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Marco Lenci</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="d-flex align-items-start">
-                                        <span class="badge rounded-pill me-2" style="background-color: #1E88E5; font-size: 0.9rem; padding: 0.5rem 0.75rem;">C</span>
-                                        <div>
-                                            <h6 class="mb-1" style="color: #bb2e29;">Social Dinner (Wed)</h6>
-                                            <p class="mb-1"><strong>Ristorante Gurmé</strong></p>
-                                            <p class="text-muted small mb-0">Via Zaccherini Alvisi 16</p>
-                                            <p class="text-muted small mb-0"><em>Wednesday evening</em></p>
-                                        </div>
-                                    </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://github.com/LorenzoLuccioli" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Lorenzo Luccioli</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
                                 </div>
-                            </div>
-                            <div class="ratio ratio-16x9">
-                                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1gx22c8nLv-PL_VQtuc6vhdwIcVj_lg4&ehbc=2E312F&noprof=1" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing all ItaLean 2025 venues in Bologna"></iframe>
-                            </div>
-                            <p class="text-muted small mt-2 mb-0 text-center"><a href="https://www.google.com/maps/dir/Fondazione+Lercaro,+Via+Riva+di+Reno,+55,+Bologna/Dipartimento+di+Matematica,+Piazza+di+Porta+San+Donato,+5,+Bologna/Ristorante+Gurm%C3%A9,+Via+Santo+Stefano,+Bologna" target="_blank" rel="noopener noreferrer" class="text-decoration-underline" style="color: #bb2e29;">Open in Google Maps →</a></p>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://github.com/pitmonticone" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Pietro Monticone</h6>
+                                    <p class="card-text text-muted">University of Trento</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://giovannipaolini.org" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Giovanni Paolini</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="https://www.unibo.it/sitoweb/claudio.sacerdoticoen" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-2">Claudio Sacerdoti Coen</h6>
+                                    <p class="card-text text-muted">University of Bologna</p>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -1038,62 +1049,76 @@
                 </div>
             </div>
 
-            <!-- Organizers Section -->
+            <!-- Schedule Section -->
             <div class="row mb-5">
                 <div class="col-12">
-                    <h2 id="organizers" class="section-title mb-4">Organizers</h2>
-                    <div class="row g-3">
-                        <div class="col-md-4">
-                            <a href="https://www.linkedin.com/in/eugenio-cainelli" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title mb-2">Eugenio Cainelli</h6>
-                                    <p class="card-text text-muted">University of Bologna</p>
+                    <h2 id="schedule" class="section-title mb-4">Schedule</h2>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <p class="text-muted small mb-3">Click a talk to read the title and abstract. Times shown below are in Central European Time.</p>
+                            <div class="schedule-wrapper">
+                                <div id="scheduleGrid" class="schedule-grid">
+                                    <div class="text-center py-4 text-muted" id="scheduleFallback">Loading schedule...</div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="https://www.unibo.it/sitoweb/marco.lenci" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title mb-2">Marco Lenci</h6>
-                                    <p class="card-text text-muted">University of Bologna</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="https://github.com/LorenzoLuccioli" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title mb-2">Lorenzo Luccioli</h6>
-                                    <p class="card-text text-muted">University of Bologna</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="https://github.com/pitmonticone" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title mb-2">Pietro Monticone</h6>
-                                    <p class="card-text text-muted">University of Trento</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="https://giovannipaolini.org" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title mb-2">Giovanni Paolini</h6>
-                                    <p class="card-text text-muted">University of Bologna</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-4">
-                            <a href="https://www.unibo.it/sitoweb/claudio.sacerdoticoen" class="card shadow-sm h-100 organizer-card text-reset" target="_blank" rel="noopener noreferrer">
-                                <div class="card-body text-center">
-                                    <h6 class="card-title mb-2">Claudio Sacerdoti Coen</h6>
-                                    <p class="card-text text-muted">University of Bologna</p>
-                                </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!-- Venue Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 id="venue" class="section-title mb-4">Venues</h2>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div class="row mb-4">
+                                <div class="col-md-4 mb-3 mb-md-0">
+                                    <div class="d-flex align-items-start">
+                                        <span class="badge rounded-pill me-2" style="background-color: #E53935; font-size: 0.9rem; padding: 0.5rem 0.75rem;">A</span>
+                                        <div>
+                                            <h6 class="mb-1" style="color: #bb2e29;">Main Conference Venue</h6>
+                                            <p class="mb-1"><strong>Fondazione Lercaro</strong></p>
+                                            <p class="text-muted small mb-0">Via Riva di Reno 55</p>
+                                            <p class="text-muted small mb-0"><em>All talks and sessions</em></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4 mb-3 mb-md-0">
+                                    <div class="d-flex align-items-start">
+                                        <span class="badge rounded-pill me-2" style="background-color: #43A047; font-size: 0.9rem; padding: 0.5rem 0.75rem;">B</span>
+                                        <div>
+                                            <h6 class="mb-1" style="color: #bb2e29;">Project Work (Wed)</h6>
+                                            <p class="mb-1"><strong>Dept. of Mathematics</strong></p>
+                                            <p class="text-muted small mb-0">Piazza di Porta San Donato 5</p>
+                                            <p class="text-muted small mb-0"><em>Wednesday afternoon</em></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="d-flex align-items-start">
+                                        <span class="badge rounded-pill me-2" style="background-color: #1E88E5; font-size: 0.9rem; padding: 0.5rem 0.75rem;">C</span>
+                                        <div>
+                                            <h6 class="mb-1" style="color: #bb2e29;">Social Dinner (Wed)</h6>
+                                            <p class="mb-1"><strong>Ristorante Gurmé</strong></p>
+                                            <p class="text-muted small mb-0">Via Zaccherini Alvisi 16</p>
+                                            <p class="text-muted small mb-0"><em>Wednesday evening</em></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ratio ratio-16x9">
+                                <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1gx22c8nLv-PL_VQtuc6vhdwIcVj_lg4&ehbc=2E312F&noprof=1" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Map showing all ItaLean 2025 venues in Bologna"></iframe>
+                            </div>
+                            <p class="text-muted small mt-2 mb-0 text-center"><a href="https://www.google.com/maps/dir/Fondazione+Lercaro,+Via+Riva+di+Reno,+55,+Bologna/Dipartimento+di+Matematica,+Piazza+di+Porta+San+Donato,+5,+Bologna/Ristorante+Gurm%C3%A9,+Via+Santo+Stefano,+Bologna" target="_blank" rel="noopener noreferrer" class="text-decoration-underline" style="color: #bb2e29;">Open in Google Maps →</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
 
             <!-- Applications Section -->
             <div class="row mb-5">
@@ -1220,7 +1245,29 @@
     <!-- Bootstrap JS bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/schedule-data.js"></script>
+    <script src="assets/js/gallery-images.js"></script>
     <script>
+        // Initialize Gallery Carousel
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselContainer = document.getElementById('carousel-images-container');
+            if (carouselContainer && typeof galleryImages !== 'undefined') {
+                galleryImages.forEach((image, index) => {
+                    const div = document.createElement('div');
+                    div.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+
+                    const img = document.createElement('img');
+                    img.src = `images/PhotoGallery/${image}`;
+                    img.className = 'd-block w-100 rounded';
+                    img.alt = 'Conference photo';
+                    img.style.maxHeight = '600px';
+                    img.style.objectFit = 'contain';
+
+                    div.appendChild(img);
+                    carouselContainer.appendChild(div);
+                });
+            }
+        });
+
         (function () {
             const defaultConfig = { startTime: '08:00', endTime: '23:00', slotMinutes: 15, slotHeight: 24 };
             const scheduleData = window.ItaleanSchedule || {};
