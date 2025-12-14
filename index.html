@@ -720,16 +720,13 @@
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="#top">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#applications">Participate</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#photos">Photo Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="#organizers">Organizers</a></li>
-<!--                    <li class="nav-item"><a class="nav-link" href="#fees">Fees</a></li>-->
-<!--                    <li class="nav-item"><a class="nav-link" href="#accommodation">Accommodation</a></li>-->
                     <li class="nav-item"><a class="nav-link" href="#speakers">Speakers</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#venue">Venue</a></li>
                     <li class="nav-item"><a class="nav-link" href="#schedule">Schedule</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#venue">Venue</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#applications">Participate</a></li>
                     <li class="nav-item"><a class="nav-link" href="#sponsors">Sponsors</a></li>
-<!--                    <li class="nav-item"><a class="nav-link" href="#timetable">Timetable</a></li>-->
-<!--                    <li class="nav-item"><a class="nav-link" href="#location">Location</a></li>-->
                 </ul>
             </div>
         </div>
@@ -773,6 +770,43 @@
     <!-- Main Content -->
     <div class="container my-5">
         <div class="content-section p-4 rounded shadow">
+            <!-- Conference Theme Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+<!--                    <h2 id="theme" class="section-title mb-4">Conference Theme</h2>-->
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <p class="card-text"><strong>ItaLean 2025</strong> brings together researchers and practitioners advancing the formalization of mathematics in Lean and exploring the interplay between machine learning and formal methods. The program includes invited lectures, hands-on tutorials, research talks from academia and industry, product demos, and a closing panel discussion.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Photo Gallery Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <h2 id="photos" class="section-title mb-4">Photo Gallery</h2>
+                    <div class="card border-0 shadow-sm">
+                        <div class="card-body">
+                            <div id="photoCarousel" class="carousel slide" data-bs-ride="carousel">
+                                <div class="carousel-inner" id="carousel-images-container">
+                                    <!-- Images will be loaded here dynamically -->
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#photoCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%;"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#photoCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true" style="background-color: rgba(0,0,0,0.5); border-radius: 50%;"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Organizers Section -->
             <div class="row mb-5">
                 <div class="col-12">
@@ -1082,18 +1116,9 @@
                 </div>
             </div>
 
-            <!-- Conference Theme Section -->
-            <div class="row mb-5">
-                <div class="col-12">
-<!--                    <h2 id="theme" class="section-title mb-4">Conference Theme</h2>-->
-                    <div class="card border-0 shadow-sm">
-                        <div class="card-body">
-                            <p class="card-text"><strong>ItaLean 2025</strong> brings together researchers and practitioners advancing the formalization of mathematics in Lean and exploring the interplay between machine learning and formal methods. The program includes invited lectures, hands-on tutorials, research talks from academia and industry, product demos, and a closing panel discussion.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+
 
             <!-- Applications Section -->
             <div class="row mb-5">
@@ -1220,7 +1245,29 @@
     <!-- Bootstrap JS bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/schedule-data.js"></script>
+    <script src="assets/js/gallery-images.js"></script>
     <script>
+        // Initialize Gallery Carousel
+        document.addEventListener('DOMContentLoaded', function() {
+            const carouselContainer = document.getElementById('carousel-images-container');
+            if (carouselContainer && typeof galleryImages !== 'undefined') {
+                galleryImages.forEach((image, index) => {
+                    const div = document.createElement('div');
+                    div.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+
+                    const img = document.createElement('img');
+                    img.src = `images/PhotoGallery/${image}`;
+                    img.className = 'd-block w-100 rounded';
+                    img.alt = 'Conference photo';
+                    img.style.maxHeight = '600px';
+                    img.style.objectFit = 'contain';
+
+                    div.appendChild(img);
+                    carouselContainer.appendChild(div);
+                });
+            }
+        });
+
         (function () {
             const defaultConfig = { startTime: '08:00', endTime: '23:00', slotMinutes: 15, slotHeight: 24 };
             const scheduleData = window.ItaleanSchedule || {};
