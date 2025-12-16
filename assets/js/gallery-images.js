@@ -1,4 +1,5 @@
 const galleryImages = [
+    "DSC_1011.JPG",
     "PXL_20251209_130106235.MP.jpg",
     "PXL_20251209_133236490.jpg",
     "PXL_20251210_161616794.jpg",
@@ -8,7 +9,6 @@ const galleryImages = [
     "20251211_110728.jpg",
     "DSC_0989.JPG",
     "DSC_0991.JPG",
-    "DSC_1011.JPG",
 
     "PXL_20251212_100246214.jpeg",
     "PXL_20251212_104128194.jpg",
