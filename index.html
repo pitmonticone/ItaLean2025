@@ -364,6 +364,37 @@
             color: #ff0000;
         }
 
+        .yt-video-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: #fee2e2;
+            color: #cc0000;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+
+        .yt-video-btn:hover {
+            background: #fecaca;
+            color: #b91c1c;
+            transform: scale(1.05);
+            text-decoration: none;
+        }
+
+        .yt-video-btn:active {
+            transform: scale(0.97);
+        }
+
+        .yt-video-btn svg {
+            flex-shrink: 0;
+        }
+
         .hero-icon-btn.youtube-btn:hover {
             background: #fff5f5;
         }
@@ -1254,7 +1285,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p class="mb-1 text-muted" id="scheduleEventTime"></p>
+                    <div class="d-flex align-items-center mb-1">
+                        <p class="mb-0 text-muted flex-grow-1" id="scheduleEventTime"></p>
+                        <a id="scheduleEventVideoLink" class="yt-video-btn d-none" target="_blank" rel="noopener noreferrer" title="Watch on YouTube">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.546 12 3.546 12 3.546s-7.505 0-9.377.504A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.504 9.376.504 9.376.504s7.505 0 9.377-.504a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                            <span>Video</span>
+                        </a>
+                    </div>
                     <p class="fw-semibold mb-1" id="scheduleEventSpeakers"></p>
                     <p class="mb-3 text-muted" id="scheduleEventChair"></p>
                     <p class="mb-0" id="scheduleEventAbstract"></p>
@@ -1427,6 +1464,7 @@
             const modalSpeakers = document.getElementById('scheduleEventSpeakers');
             const modalChair = document.getElementById('scheduleEventChair');
             const modalTime = document.getElementById('scheduleEventTime');
+            const modalVideoLink = document.getElementById('scheduleEventVideoLink');
             const modalAbstract = document.getElementById('scheduleEventAbstract');
             const scheduleModal = modalElement && window.bootstrap ? bootstrap.Modal.getOrCreateInstance(modalElement) : null;
 
@@ -1454,6 +1492,17 @@
 
                 const dayInfo = scheduleDays.find(day => day.key === scheduleEvent.day);
                 modalTime.textContent = formatTimeRange(scheduleEvent, dayInfo);
+
+                const videoUrl = typeof scheduleEvent.videoUrl === 'string' ? scheduleEvent.videoUrl.trim() : '';
+                if (modalVideoLink) {
+                    if (videoUrl) {
+                        modalVideoLink.href = videoUrl;
+                        modalVideoLink.classList.remove('d-none');
+                    } else {
+                        modalVideoLink.removeAttribute('href');
+                        modalVideoLink.classList.add('d-none');
+                    }
+                }
 
                 const abstractText = scheduleEvent.abstract && scheduleEvent.abstract.trim() ? scheduleEvent.abstract : 'Details coming soon.';
                 modalAbstract.innerHTML = abstractText;
